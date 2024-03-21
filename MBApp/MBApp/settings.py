@@ -16,12 +16,10 @@ import pymysql
 
 pymysql.install_as_MySQLdb()
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = '%s/course/static/' % BASE_DIR
 CKEDITOR_UPLOAD_PATH = "ckeditor/images/%Y/%m"
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -46,6 +44,8 @@ INSTALLED_APPS = [
     'course.apps.CourseConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [

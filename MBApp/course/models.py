@@ -4,8 +4,9 @@ from django.contrib.auth.models import AbstractUser
 from ckeditor.fields import RichTextField
 from cloudinary.models import CloudinaryField
 
+
 class User(AbstractUser):
-    pass
+    avatar = CloudinaryField(null=True)
 
 
 class Category(models.Model):
@@ -49,6 +50,21 @@ class Lesson(BaseModel):
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
-        return self.name
+        return self.subject
 
 
+class Interaction(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
+
+class Comment(Interaction):
+    content = models.CharField(max_length=255)
+
+
+class Like(Interaction):
+    class Meta:
+        unique_together = ('user', 'lesson')
